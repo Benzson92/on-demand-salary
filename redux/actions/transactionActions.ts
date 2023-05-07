@@ -54,10 +54,6 @@ export const fetchUserWithdraw = createAsyncThunk<
       textColor: 'white',
       backgroundColor: 'green',
       opacity: 1,
-      shadow: true,
-      animation: true,
-      hideOnPress: true,
-      delay: 0,
     });
 
     return response.data;
