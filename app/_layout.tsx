@@ -1,9 +1,16 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { SplashScreen, Stack } from 'expo-router';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { SplashScreen, Slot } from 'expo-router';
+import React, { useEffect } from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components/native';
+import { RootSiblingParent } from 'react-native-root-siblings';
+
+import store, { persistor } from '../redux/store';
+
+import AuthProvider from '../context/authContext';
+import { theme } from '../theme';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -11,7 +18,6 @@ export {
 } from 'expo-router';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
 };
 
@@ -36,16 +42,19 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-      </ThemeProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <StyledThemeProvider theme={theme}>
+            <RootSiblingParent>
+              <AuthProvider>
+                <Slot />
+              </AuthProvider>
+            </RootSiblingParent>
+          </StyledThemeProvider>
+        </PersistGate>
+      </Provider>
     </>
   );
 }
