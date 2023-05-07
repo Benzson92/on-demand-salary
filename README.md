@@ -46,6 +46,13 @@ To get started with the app, you need to have Node.js and Yarn installed on your
 6. Run `yarn start` to start the Expo development server.
 7. Follow the instructions in your terminal to run the app on physical device.
 
+## Necessary Environment Variables
+
+```sh
+API_URL = "http://<your IP Address>:3000/api/v1"
+OTP = "<your mock OTP code>"
+```
+
 ## Testing
 
 The app uses Jest as its testing framework. To run the tests, you can run `yarn test` in your terminal. You can also run `yarn test --watchAll` to run the tests in watch mode.
