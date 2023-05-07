@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { shallowEqual } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
 import { useAuth } from '../../context/authContext';
 
@@ -18,6 +19,8 @@ import { selectAuth } from '../../redux/reducers/authReducer';
 import OTPPINForm from '../../components/otp-pin/OTPPINForm';
 
 const screenWidth = Dimensions.get('window').width;
+
+const OTP = process.env.OTP;
 
 interface RouteParams {
   phoneNumber: string;
@@ -34,11 +37,18 @@ const VerifyOTPPage: React.FunctionComponent = () => {
   const { params } = useRoute();
   const { phoneNumber } = params as RouteParams;
 
+  const handleHelpPress = useCallback(() => {
+    Toast.show(`Your OTP code is ${OTP}.`, {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.TOP,
+    });
+  }, []);
+
   const handleConfirmPress = useCallback(
     async (otpCode: string) => {
       Keyboard.dismiss();
 
-      if (otpCode !== '1234') {
+      if (otpCode !== OTP) {
         setErrorMessage("Your OTP code doesn't match.");
         return;
       }
@@ -49,6 +59,13 @@ const VerifyOTPPage: React.FunctionComponent = () => {
   );
 
   useEffect(() => {
+    Toast.show('Please check notification for OTP', {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.TOP,
+    });
+  }, []);
+
+  useEffect(() => {
     setErrorMessage(error.message);
   }, [error.message]);
 
@@ -57,6 +74,9 @@ const VerifyOTPPage: React.FunctionComponent = () => {
       <View style={styles.container}>
         <Text style={styles.title}>Verify your mobile</Text>
         <Text style={styles.subtitle}>Please enter your OTP code</Text>
+        <Text onPress={handleHelpPress} style={styles.help}>
+          Can&apos;t see OTP?
+        </Text>
         <View style={styles.OTPPINFormContainer}>
           <OTPPINForm
             errorMessage={errorMessage}
@@ -78,6 +98,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 52,
     width: screenWidth,
+  },
+  help: {
+    color: 'blue',
+    marginTop: 24,
+    textAlign: 'center',
   },
   subtitle: {
     textAlign: 'center',
