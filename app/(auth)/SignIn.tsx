@@ -33,11 +33,13 @@ const StyledTextInput = styled.TextInput`
 
 const screenWidth = Dimensions.get('window').width;
 
+const OTP = process.env.OTP;
+
 const message: NotificationMessageDTO = {
   to: '',
   sound: 'default',
   title: 'On Demand Salary',
-  body: 'Your OTP code is 1234.',
+  body: `Your OTP code is ${OTP}.`,
 };
 
 const SignInPage: React.FunctionComponent = () => {
