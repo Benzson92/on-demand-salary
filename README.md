@@ -100,6 +100,8 @@ yarn add cors
 5. Import the cors package in your backend code:
 
 ```sh
+// "cors" is a middleware for enabling Cross-Origin Resource Sharing (CORS) in the server.
+
 // on src/index.js
 
 const express = require('express')
