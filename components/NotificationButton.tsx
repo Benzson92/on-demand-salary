@@ -8,8 +8,6 @@ import { NotificationMessageDTO } from '../models/notification/NotificationMessa
 import { ButtonContainer } from '../app/styles/ButtonContainer';
 import { ButtonText } from '../app/styles/ButtonText';
 
-const PROJECT_ID = process.env.PROJECT_ID;
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -53,11 +51,7 @@ async function registerForPushNotificationsAsync(): Promise<string> {
       Alert.alert('Failed to get push token for push notification!');
       return '';
     }
-    token = (
-      await Notifications.getExpoPushTokenAsync({
-        projectId: PROJECT_ID,
-      })
-    ).data;
+    token = (await Notifications.getExpoPushTokenAsync()).data;
   } else {
     Alert.alert('Must use physical device for Push Notifications');
     return '';
