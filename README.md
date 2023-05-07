@@ -92,6 +92,25 @@ cd server-mobile-frontend-test
 ```sh
 yarn install
 ```
+4. Install cors package:
+
+```sh
+yarn add cors
+```
+5. Import the cors package in your backend code:
+
+```sh
+// on src/index.js
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+
+...
+
+// Use cors middleware
+app.use(cors());
+```
 
 ## Starting the Server
 
