@@ -42,8 +42,9 @@ To get started with the app, you need to have Node.js and Yarn installed on your
 2. Navigate to the project directory in your terminal.
 3. Run `yarn` to install the project dependencies.
 4. Create a `.env` file in the root directory of the project and add the necessary environment variables (e.g. API endpoint URLs, JWT secret key, etc.).
-5. Run `yarn start` to start the Expo development server.
-6. Follow the instructions in your terminal to run the app on an emulator or physical device.
+5. Install Expo Go on your device. (see https://expo.dev/client)
+6. Run `yarn start` to start the Expo development server.
+7. Follow the instructions in your terminal to run the app on physical device.
 
 ## Testing
 
