@@ -45,6 +45,9 @@ To get started with the app, you need to have Node.js and Yarn installed on your
 5. Install Expo Go on your device. (see https://expo.dev/client)
 6. Run `yarn start` to start the Expo development server.
 7. Follow the instructions in your terminal to run the app on physical device.
+8. To format the code using Prettier, run `yarn prettier`.
+9. This project also uses Husky and lint-staged to automatically format and lint code before committing. To install these dependencies, run `yarn prepare`.
+10. To manually run the pre-commit hooks, run `yarn pre-commit`.
 
 ## Necessary Environment Variables
 
